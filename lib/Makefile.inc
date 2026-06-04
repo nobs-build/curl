@@ -322,6 +322,7 @@ LIB_HFILES =         \
   curl_sha256.h      \
   curl_sha512_256.h  \
   curl_share.h       \
+  curl_system.h      \
   curl_sspi.h        \
   curl_threads.h     \
   curl_trc.h         \
@@ -412,6 +413,7 @@ LIB_HFILES =         \
   url.h              \
   urlapi-int.h       \
   urldata.h          \
+  version_win32.h    \
   ws.h
 
 LIB_RCFILES = libcurl.rc

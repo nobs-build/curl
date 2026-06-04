@@ -68,7 +68,7 @@ curl(config): tool_objects_rsp(config) LibCurl::libcurl_static(config)
 
   if TARGET_PLATFORM = "linux"
   {
-    LINK_FLAGS += ["-pthread"]
+    C_FLAGS += ["-pthread"]
   }
 }
 
@@ -83,6 +83,7 @@ tool_objects_rsp(config): +tool_objects(config)
 tool_objects(config): +tool_inputs(config)
 {
   C_FILES
+  C_FLAGS += C_COMPILE_FLAG
   C_DEFINES += ["CURL_STATICLIB"]
 
   if config.C_DEFINES

@@ -62,7 +62,8 @@ profiles
     STATIC_LIB_SUFFIX = ".lib"
     SHARED_LIB_SUFFIX = ".dll"
     EXE_SUFFIX = ".exe"
-    C_FLAGS += ["/c", "/Zi", "/Od"]
+    C_COMPILE_FLAG = ["/c"]
+    C_FLAGS += ["/Zi", "/Od"]
     LINK_FLAGS += ["/DEBUG"]
   }
 
@@ -74,7 +75,8 @@ profiles
     STATIC_LIB_SUFFIX = ".lib"
     SHARED_LIB_SUFFIX = ".dll"
     EXE_SUFFIX = ".exe"
-    C_FLAGS += ["/c", "/O2"]
+    C_COMPILE_FLAG = ["/c"]
+    C_FLAGS += ["/O2"]
   }
 
   linux_debug
@@ -84,7 +86,8 @@ profiles
     STATIC_LIB_SUFFIX = ".a"
     SHARED_LIB_SUFFIX = ".so"
     EXE_SUFFIX = ""
-    C_FLAGS += ["-c", "-g", "-O0"]
+    C_COMPILE_FLAG = ["-c"]
+    C_FLAGS += ["-g", "-O0"]
   }
 
   linux_release
@@ -94,6 +97,7 @@ profiles
     STATIC_LIB_SUFFIX = ".a"
     SHARED_LIB_SUFFIX = ".so"
     EXE_SUFFIX = ""
-    C_FLAGS += ["-c", "-O2"]
+    C_COMPILE_FLAG = ["-c"]
+    C_FLAGS += ["-O2"]
   }
 }

@@ -1,5 +1,5 @@
-#ifndef HEADER_CURL_SYSTEM_WIN32_H
-#define HEADER_CURL_SYSTEM_WIN32_H
+#ifndef HEADER_CURL_SYSTEM_H
+#define HEADER_CURL_SYSTEM_H
 /***************************************************************************
  *                                  _   _ ____  _
  *  Project                     ___| | | |  _ \| |
@@ -7,7 +7,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) Steve Holme, <steve_holme@hotmail.com>.
+ * Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -23,6 +23,14 @@
  * SPDX-License-Identifier: curl
  *
  ***************************************************************************/
-#include "../../curl_system.h"
+#include "curl_setup.h"
 
-#endif /* HEADER_CURL_SYSTEM_WIN32_H */
+#ifdef _WIN32
+CURLcode Curl_system_init(long flags);
+void Curl_system_cleanup(long init_flags);
+#else
+#define Curl_system_init(x) CURLE_OK
+#define Curl_system_cleanup(x) Curl_nop_stmt
+#endif
+
+#endif /* HEADER_CURL_SYSTEM_H */

@@ -70,7 +70,6 @@
 #include "multihandle.h"
 #include "rand.h"
 #include "curlx/strdup.h"
-#include "system_win32.h"
 #include "curlx/nonblock.h"
 #include "curlx/strcopy.h"
 #include "version_win32.h"

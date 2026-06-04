@@ -1,5 +1,5 @@
-#ifndef HEADER_CURL_VERSION_WIN32_H
-#define HEADER_CURL_VERSION_WIN32_H
+#ifndef HEADER_CURL_PLAT_WINDOWS_VERSION_WIN32_H
+#define HEADER_CURL_PLAT_WINDOWS_VERSION_WIN32_H
 /***************************************************************************
  *                                  _   _ ____  _
  *  Project                     ___| | | |  _ \| |
@@ -23,38 +23,6 @@
  * SPDX-License-Identifier: curl
  *
  ***************************************************************************/
-#include "curl_setup.h"
+#include "../../version_win32.h"
 
-#ifdef _WIN32
-
-/* Version condition */
-typedef enum {
-  VERSION_LESS_THAN,
-  VERSION_LESS_THAN_EQUAL,
-  VERSION_EQUAL,
-  VERSION_GREATER_THAN_EQUAL,
-  VERSION_GREATER_THAN
-} VersionCondition;
-
-/* Platform identifier */
-typedef enum {
-  PLATFORM_DONT_CARE,
-  PLATFORM_WINDOWS,
-  PLATFORM_WINNT
-} PlatformIdentifier;
-
-#ifdef CURL_WINDOWS_UWP
-#define curlx_verify_windows_init() Curl_nop_stmt
-#else
-void curlx_verify_windows_init(void);
-#endif
-/* This is used to verify if we are running on a specific Windows version */
-bool curlx_verify_windows_version(const unsigned int majorVersion,
-                                  const unsigned int minorVersion,
-                                  const unsigned int buildVersion,
-                                  const PlatformIdentifier platform,
-                                  const VersionCondition condition);
-
-#endif /* _WIN32 */
-
-#endif /* HEADER_CURL_VERSION_WIN32_H */
+#endif /* HEADER_CURL_PLAT_WINDOWS_VERSION_WIN32_H */

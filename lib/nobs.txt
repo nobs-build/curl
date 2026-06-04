@@ -145,12 +145,14 @@ objects_shared_rsp(config): +objects_shared(config)
 objects_static(config): +compile_inputs(config)
 {
   C_FILES
+  C_FLAGS += C_COMPILE_FLAG
   C_DEFINES += ["CURL_STATICLIB"]
 }
 
 objects_shared(config): +compile_inputs(config)
 {
   C_FILES
+  C_FLAGS += C_COMPILE_FLAG
 
   if TARGET_PLATFORM = "windows"
   {

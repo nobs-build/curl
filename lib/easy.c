@@ -69,7 +69,7 @@
 #include "vssh/ssh.h"
 #include "setopt.h"
 #include "http_digest.h"
-#include "system_win32.h"
+#include "curl_system.h"
 #include "curlx/dynbuf.h"
 #include "bufref.h"
 #include "altsvc.h"
@@ -150,8 +150,8 @@ static CURLcode global_init(long flags, bool memoryfuncs)
     goto fail;
   }
 
-  if(Curl_win32_init(flags)) {
-    DEBUGF(curl_mfprintf(stderr, "Error: win32_init failed\n"));
+  if(Curl_system_init(flags)) {
+    DEBUGF(curl_mfprintf(stderr, "Error: Curl_system_init failed\n"));
     goto fail;
   }
 
@@ -269,9 +269,7 @@ void curl_global_cleanup(void)
   Curl_ssl_cleanup();
   Curl_async_global_cleanup();
 
-#ifdef _WIN32
-  Curl_win32_cleanup(easy_init_flags);
-#endif
+  Curl_system_cleanup(easy_init_flags);
 
   Curl_amiga_cleanup();
 

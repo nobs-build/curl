@@ -1,8 +1,14 @@
 #ifndef HEADER_CURL_CONFIG_LINUX_H
 #define HEADER_CURL_CONFIG_LINUX_H
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+
 #define CURL_DISABLE_LDAP 1
 #define CURL_DISABLE_LDAPS 1
+
+#define CURL_OS "Linux"
 
 #define HAVE_ACCEPT4 1
 #define HAVE_ARPA_INET_H 1
@@ -47,6 +53,7 @@
 #define HAVE_STDBOOL_H 1
 #define HAVE_STRCASECMP 1
 #define HAVE_STRERROR_R 1
+#define HAVE_POSIX_STRERROR_R 1
 #define HAVE_STRUCT_TIMEVAL 1
 #define HAVE_SYS_IOCTL_H 1
 #define HAVE_SYS_PARAM_H 1
@@ -60,6 +67,8 @@
 #define HAVE_UNISTD_H 1
 #define HAVE_UTIME 1
 #define HAVE_UTIME_H 1
+
+#define USE_UNIX_SOCKETS 1
 
 #define RECV_TYPE_ARG1 int
 #define RECV_TYPE_ARG2 void *
