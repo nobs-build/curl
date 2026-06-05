@@ -95,7 +95,6 @@ LIB_VTLS_CFILES =           \
   vtls/rustls.c             \
   vtls/schannel.c           \
   vtls/schannel_verify.c    \
-  vtls/vtls.c               \
   vtls/vtls_scache.c        \
   vtls/vtls_spack.c         \
   vtls/wolfssl.c            \
@@ -122,7 +121,6 @@ LIB_VTLS_HFILES =           \
 LIB_VQUIC_CFILES =      \
   vquic/curl_ngtcp2.c   \
   vquic/curl_quiche.c   \
-  vquic/vquic.c         \
   vquic/vquic-tls.c
 
 LIB_VQUIC_HFILES =      \
@@ -142,7 +140,7 @@ LIB_VSSH_HFILES =    \
   vssh/ssh.h
 
 LIB_CFILES =         \
-  altsvc.c           \
+  protocols/altsvc.c \
   plat/amigaos/amigaos.c \
   asyn-ares.c        \
   asyn-base.c        \
@@ -184,9 +182,9 @@ LIB_CFILES =         \
   curl_trc.c         \
   cw-out.c           \
   cw-pause.c         \
-  dict.c             \
+  protocols/dict.c   \
   dnscache.c         \
-  doh.c              \
+  protocols/doh.c    \
   dynhds.c           \
   easy.c             \
   easygetopt.c       \
@@ -196,22 +194,22 @@ LIB_CFILES =         \
   file.c             \
   fileinfo.c         \
   formdata.c         \
-  ftp.c              \
+  protocols/ftp.c    \
   ftplistparser.c    \
   getenv.c           \
   getinfo.c          \
-  gopher.c           \
+  protocols/gopher.c \
   hash.c             \
   headers.c          \
   hmac.c             \
   hostip.c           \
   hostip4.c          \
   hostip6.c          \
-  hsts.c             \
+  protocols/hsts.c   \
   http.c             \
   http1.c            \
   http2.c            \
-  http_aws_sigv4.c   \
+  protocols/http_aws_sigv4.c \
   http_chunks.c      \
   http_digest.c      \
   http_negotiate.c   \
@@ -220,8 +218,8 @@ LIB_CFILES =         \
   httpsrr.c          \
   idn.c              \
   if2ip.c            \
-  imap.c             \
-  ldap.c             \
+  protocols/imap.c   \
+  protocols/ldap.c   \
   llist.c            \
   plat/macos/macos.c \
   md4.c              \
@@ -229,31 +227,31 @@ LIB_CFILES =         \
   memdebug.c         \
   mime.c             \
   mprintf.c          \
-  mqtt.c             \
+  protocols/mqtt.c   \
   multi.c            \
   multi_ev.c         \
   multi_ntfy.c       \
   netrc.c            \
   noproxy.c          \
-  openldap.c         \
+  protocols/openldap.c \
   parsedate.c        \
   peer.c             \
   pingpong.c         \
-  pop3.c             \
+  protocols/pop3.c   \
   progress.c         \
   protocol.c         \
   psl.c              \
   rand.c             \
   ratelimit.c        \
   request.c          \
-  rtsp.c             \
+  protocols/rtsp.c   \
   select.c           \
   sendf.c            \
   setopt.c           \
   sha256.c           \
   slist.c            \
-  smb.c              \
-  smtp.c             \
+  protocols/smb.c    \
+  protocols/smtp.c   \
   socketpair.c       \
   socks.c            \
   socks_gssapi.c     \
@@ -263,8 +261,8 @@ LIB_CFILES =         \
   strequal.c         \
   strerror.c         \
   plat/windows/system_win32.c \
-  telnet.c           \
-  tftp.c             \
+  protocols/telnet.c \
+  protocols/tftp.c   \
   thrdpool.c         \
   thrdqueue.c        \
   transfer.c         \
@@ -274,7 +272,9 @@ LIB_CFILES =         \
   uint-table.c       \
   url.c              \
   urlapi.c           \
+  vquic.c            \
   version.c          \
+  vtls.c             \
   ws.c
 
 LIB_HFILES =         \

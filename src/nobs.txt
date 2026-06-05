@@ -34,17 +34,8 @@ build: curl(config)
     }
   }
 
-  if curl.BINARY
-  {
-    ^BINARY = curl.BINARY
-    ^BINARY_NAME = curl.BINARY_NAME
-  }
-
-  if curl.EXE
-  {
-    ^EXE = curl.EXE
-    ^EXE_NAME = curl.EXE_NAME
-  }
+  ^BINARY = curl.BINARY
+  ^BINARY_NAME = curl.BINARY_NAME
 }
 
 curl(config): tool_objects_rsp(config) LibCurl::libcurl_static(config)

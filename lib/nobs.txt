@@ -78,18 +78,6 @@ all: libcurl_static(config) libcurl_shared(config)
   ^STATIC_LIB_NAME = libcurl_static.LIB_NAME
   ^SHARED_BINARY = libcurl_shared.BINARY
   ^SHARED_BINARY_NAME = libcurl_shared.BINARY_NAME
-
-  if libcurl_shared.DLL
-  {
-    ^SHARED_DLL = libcurl_shared.DLL
-    ^SHARED_DLL_NAME = libcurl_shared.DLL_NAME
-  }
-
-  if libcurl_shared.LIB
-  {
-    ^SHARED_IMPORT_LIB = libcurl_shared.LIB
-    ^SHARED_IMPORT_LIB_NAME = libcurl_shared.LIB_NAME
-  }
 }
 
 libcurl_static(config): objects_static_rsp(config)
@@ -196,120 +184,7 @@ core(config):
 {
   NO_TOOL
   ^C_FILES = [
-    P"(asyn-base.c)",
-    P"(asyn-thrdd.c)",
-    P"(bufq.c)",
-    P"(bufref.c)",
-    P"(capsule.c)",
-    P"(cf-capsule.c)",
-    P"(cf-dns.c)",
-    P"(cf-h1-proxy.c)",
-    P"(cf-h2-proxy.c)",
-    P"(cf-haproxy.c)",
-    P"(cf-https-connect.c)",
-    P"(cf-ip-happy.c)",
-    P"(cf-socket.c)",
-    P"(cfilters.c)",
-    P"(conncache.c)",
-    P"(connect.c)",
-    P"(content_encoding.c)",
-    P"(cookie.c)",
-    P"(creds.c)",
-    P"(cshutdn.c)",
-    P"(curl_addrinfo.c)",
-    P"(curl_endian.c)",
-    P"(curl_fnmatch.c)",
-    P"(curl_fopen.c)",
-    P"(curl_get_line.c)",
-    P"(curl_gethostname.c)",
-    P"(curl_gssapi.c)",
-    P"(curl_memrchr.c)",
-    P"(curl_ntlm_core.c)",
-    P"(curl_range.c)",
-    P"(curl_sasl.c)",
-    P"(curl_sha512_256.c)",
-    P"(curl_share.c)",
-    P"(curl_sspi.c)",
-    P"(curl_threads.c)",
-    P"(curl_trc.c)",
-    P"(cw-out.c)",
-    P"(cw-pause.c)",
-    P"(dnscache.c)",
-    P"(dynhds.c)",
-    P"(easy.c)",
-    P"(easygetopt.c)",
-    P"(easyoptions.c)",
-    P"(escape.c)",
-    P"(fake_addrinfo.c)",
-    P"(file.c)",
-    P"(fileinfo.c)",
-    P"(formdata.c)",
-    P"(ftplistparser.c)",
-    P"(getenv.c)",
-    P"(getinfo.c)",
-    P"(hash.c)",
-    P"(headers.c)",
-    P"(hmac.c)",
-    P"(hostip.c)",
-    P"(hostip4.c)",
-    P"(hostip6.c)",
-    P"(http.c)",
-    P"(http1.c)",
-    P"(http2.c)",
-    P"(http_chunks.c)",
-    P"(http_digest.c)",
-    P"(http_negotiate.c)",
-    P"(http_ntlm.c)",
-    P"(http_proxy.c)",
-    P"(httpsrr.c)",
-    P"(idn.c)",
-    P"(if2ip.c)",
-    P"(llist.c)",
-    P"(md4.c)",
-    P"(md5.c)",
-    P"(memdebug.c)",
-    P"(mime.c)",
-    P"(mprintf.c)",
-    P"(multi.c)",
-    P"(multi_ev.c)",
-    P"(multi_ntfy.c)",
-    P"(netrc.c)",
-    P"(noproxy.c)",
-    P"(parsedate.c)",
-    P"(peer.c)",
-    P"(pingpong.c)",
-    P"(progress.c)",
-    P"(protocol.c)",
-    P"(psl.c)",
-    P"(rand.c)",
-    P"(ratelimit.c)",
-    P"(request.c)",
-    P"(select.c)",
-    P"(sendf.c)",
-    P"(setopt.c)",
-    P"(sha256.c)",
-    P"(slist.c)",
-    P"(socketpair.c)",
-    P"(socks.c)",
-    P"(socks_gssapi.c)",
-    P"(socks_sspi.c)",
-    P"(splay.c)",
-    P"(strcase.c)",
-    P"(strequal.c)",
-    P"(strerror.c)",
-    P"(thrdpool.c)",
-    P"(thrdqueue.c)",
-    P"(transfer.c)",
-    P"(uint-bset.c)",
-    P"(uint-hash.c)",
-    P"(uint-spbset.c)",
-    P"(uint-table.c)",
-    P"(url.c)",
-    P"(urlapi.c)",
-    P"(vquic/vquic.c)",
-    P"(version.c)",
-    P"(vtls/vtls.c)",
-    P"(ws.c)"
+    P"(*.c)"
   ]
 }
 
@@ -331,28 +206,4 @@ platform(config):
       "HAVE_CONFIG_H"
     ]
   }
-}
-
-feature_protocols(config):
-{
-  NO_TOOL
-  ^C_FILES = [
-    P"(altsvc.c)",
-    P"(dict.c)",
-    P"(doh.c)",
-    P"(ftp.c)",
-    P"(gopher.c)",
-    P"(hsts.c)",
-    P"(http_aws_sigv4.c)",
-    P"(imap.c)",
-    P"(ldap.c)",
-    P"(mqtt.c)",
-    P"(openldap.c)",
-    P"(pop3.c)",
-    P"(rtsp.c)",
-    P"(smb.c)",
-    P"(smtp.c)",
-    P"(telnet.c)",
-    P"(tftp.c)"
-  ]
 }
