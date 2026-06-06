@@ -1,0 +1,16 @@
+unit CurlTool
+
+tool_sources:
+{
+  NO_TOOL
+
+  ^INCLUDE = [
+    P"(.)",
+    P"(..)"
+  ]
+
+  ^C_FILES = [
+    P"(*.c)",
+    P"(plat/${target_platform}/*.c)"
+  ]
+}

@@ -43,14 +43,14 @@ if(ENABLE_CURL_MANUAL AND (Perl_FOUND OR EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/too
       DEPENDS
         generate-curl.1
         "${CMAKE_CURRENT_SOURCE_DIR}/mkhelp.pl"
-        "${CMAKE_CURRENT_SOURCE_DIR}/tool_hugehelp.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tool/tool_hugehelp.h"
         "${CURL_ASCIIPAGE}"
       VERBATIM)
   else()
     message(STATUS "Perl not found. Using the pre-built tool_hugehelp.c found in the source tree.")
   endif()
   list(APPEND _curl_cfiles_gen "tool_hugehelp.c")
-  list(APPEND _curl_hfiles_gen "tool_hugehelp.h")
+  list(APPEND _curl_hfiles_gen "tool/tool_hugehelp.h")
   list(APPEND _curl_definitions "USE_MANUAL")
 endif()
 
@@ -94,6 +94,7 @@ endif()
 set_property(DIRECTORY APPEND PROPERTY INCLUDE_DIRECTORIES
   "${PROJECT_BINARY_DIR}/lib"        # for "curl_config.h"
   "${PROJECT_SOURCE_DIR}/lib"        # for "curl_setup.h", curlx
+  "${CMAKE_CURRENT_SOURCE_DIR}/tool" # for "tool_setup.h"
   "${CMAKE_CURRENT_SOURCE_DIR}"      # for "tool_hugehelp.c"
 )
 

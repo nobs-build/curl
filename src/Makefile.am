@@ -44,6 +44,7 @@ EXTRA_DIST = CMakeLists.txt .checksrc mk-file-embed.pl mkhelp.pl $(CURL_RCFILES)
 AM_CPPFLAGS = -I$(top_srcdir)/include        \
               -I$(top_builddir)/lib          \
               -I$(top_srcdir)/lib            \
+              -I$(srcdir)/tool               \
               -I$(srcdir)
 
 bin_PROGRAMS = curl
@@ -182,7 +183,7 @@ $(HUGE):
 endif
 
 curl_cfiles_gen += $(HUGE)
-curl_hfiles_gen += tool_hugehelp.h
+curl_hfiles_gen += tool/tool_hugehelp.h
 CLEANFILES += $(HUGE)
 
 CA_EMBED_CSOURCE = tool_ca_embed.c

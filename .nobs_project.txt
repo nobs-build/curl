@@ -39,6 +39,8 @@ units
   CurlTool
   {
     "src/nobs.txt"
+    "src/core/nobs.txt"
+    "src/curl/nobs.txt"
   }
 
   LibCurl

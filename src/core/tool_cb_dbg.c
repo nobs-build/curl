@@ -27,7 +27,7 @@
 #include "tool_msgs.h"
 #include "tool_cb_dbg.h"
 #include "tool_util.h"
-#include "toolx/tool_time.h"
+#include "tool_time.h"
 
 /*
  * Return the formatted HH:MM:SS for the tv_sec given.
