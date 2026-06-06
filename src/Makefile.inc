@@ -166,4 +166,4 @@ CURL_HFILES = \
   tool/var.h \
   $(TOOLX_HFILES)
 
-CURL_RCFILES = curl.rc
+CURL_RCFILES = ../products/curl/curl.rc

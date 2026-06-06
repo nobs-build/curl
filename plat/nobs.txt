@@ -1,0 +1,20 @@
+unit Platform
+
+sources:
+{
+  NO_TOOL
+  ^C_FILES = P"(${TARGET_PLATFORM}/*.c)"
+  ^INCLUDE = P"(${TARGET_PLATFORM})"
+
+  if TARGET_PLATFORM = "linux"
+  {
+    ^C_DEFINES = ["HAVE_CONFIG_H"]
+  }
+}
+
+shared_sources:
+{
+  NO_TOOL
+  ^C_FILES = P"(${TARGET_PLATFORM}/shared/*.c)"
+  ^INCLUDE = P"(${TARGET_PLATFORM})"
+}

@@ -1,0 +1,79 @@
+unit LibCurl
+
+build: libcurl_static(config)
+{
+  NO_TOOL
+
+  config =
+  {
+    C_DEFINES = [
+      "CURL_DISABLE_ALTSVC",
+      "CURL_DISABLE_AWS",
+      "CURL_DISABLE_DICT",
+      "CURL_DISABLE_DOH",
+      "CURL_DISABLE_FTP",
+      "CURL_DISABLE_GOPHER",
+      "CURL_DISABLE_HSTS",
+      "CURL_DISABLE_IMAP",
+      "CURL_DISABLE_LDAP",
+      "CURL_DISABLE_LDAPS",
+      "CURL_DISABLE_MQTT",
+      "CURL_DISABLE_POP3",
+      "CURL_DISABLE_RTSP",
+      "CURL_DISABLE_SMB",
+      "CURL_DISABLE_SMTP",
+      "CURL_DISABLE_TELNET",
+      "CURL_DISABLE_TFTP",
+      "CURL_DISABLE_WEBSOCKETS"
+    ]
+  }
+
+  ^LIB = libcurl_static.LIB
+  ^LIB_NAME = libcurl_static.LIB_NAME
+  ^INCLUDE = libcurl_static.INCLUDE
+  ^C_DEFINES = libcurl_static.C_DEFINES
+}
+
+libcurl_static(config): objects_static_rsp(config)
+{
+  STATIC
+  OBJS = ["@${objects_static_rsp.RSP_FILE}"]
+  OUTPUT_NAME = "libcurl${STATIC_LIB_SUFFIX}"
+  ^INCLUDE
+  ^C_DEFINES += ["CURL_STATICLIB"]
+}
+
+api(config): compile_inputs(config)
+{
+  NO_TOOL
+  ^INCLUDE = compile_inputs.INCLUDE
+  ^C_DEFINES = compile_inputs.C_DEFINES
+}
+
+objects_static_rsp(config): +objects_static(config)
+{
+  OBJ2RSP
+  OBJ = OBJS
+  RSP_DIR = P"(${PROJECT_ROOT}/${OUTPUT_DEF_DIR}/rsp/${PROFILE})"
+  ^RSP_FILE = P"(${RSP_DIR}/libcurl-static.rsp)"
+}
+
+objects_static(config): +compile_inputs(config)
+{
+  C_FILES
+  C_FLAGS += C_COMPILE_FLAG
+  C_DEFINES += ["CURL_STATICLIB"]
+}
+
+compile_inputs(config): +Core::sources +Platform::sources +FeatureAuth::sources +FeatureTls::base +FeatureQuic::base +FeatureProtocols::http +FeatureProtocols::file
+{
+  NO_TOOL
+  ^C_FILES
+  ^INCLUDE
+  ^C_DEFINES = ["BUILDING_LIBCURL"]
+
+  if config.C_DEFINES
+  {
+    ^C_DEFINES += config.C_DEFINES
+  }
+}

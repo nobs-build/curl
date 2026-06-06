@@ -1,0 +1,8 @@
+unit FeatureSsh
+
+sources:
+{
+  NO_TOOL
+  ^C_FILES = P"(*.c)"
+  ^INCLUDE = P"(.)"
+}

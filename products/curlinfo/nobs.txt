@@ -1,0 +1,63 @@
+unit CurlInfo
+
+build: curlinfo(config)
+{
+  NO_TOOL
+
+  config =
+  {
+    C_DEFINES = [
+      "CURL_DISABLE_ALTSVC",
+      "CURL_DISABLE_AWS",
+      "CURL_DISABLE_DICT",
+      "CURL_DISABLE_DOH",
+      "CURL_DISABLE_FTP",
+      "CURL_DISABLE_GOPHER",
+      "CURL_DISABLE_HSTS",
+      "CURL_DISABLE_IMAP",
+      "CURL_DISABLE_LDAP",
+      "CURL_DISABLE_LDAPS",
+      "CURL_DISABLE_MQTT",
+      "CURL_DISABLE_POP3",
+      "CURL_DISABLE_RTSP",
+      "CURL_DISABLE_SMB",
+      "CURL_DISABLE_SMTP",
+      "CURL_DISABLE_TELNET",
+      "CURL_DISABLE_TFTP",
+      "CURL_DISABLE_WEBSOCKETS"
+    ]
+  }
+
+  ^BINARY = curlinfo.BINARY
+  ^BINARY_NAME = curlinfo.BINARY_NAME
+}
+
+curlinfo(config): +sources +LibCurl::api(config) LibCurl::libcurl_static(config)
+{
+  LINK
+  C_FILES
+  LIB = [LibCurl.libcurl_static.LIB]
+  OUTPUT_NAME = "curlinfo${EXE_SUFFIX}"
+
+  if TARGET_PLATFORM = "windows"
+  {
+    LIB += [
+      "advapi32.lib",
+      "bcrypt.lib",
+      "crypt32.lib",
+      "ws2_32.lib"
+    ]
+  }
+
+  if TARGET_PLATFORM = "linux"
+  {
+    C_FLAGS += ["-pthread"]
+  }
+}
+
+sources:
+{
+  NO_TOOL
+  ^C_FILES = P"(curlinfo.c)"
+  ^INCLUDE = [P"(../curl/tool)"]
+}

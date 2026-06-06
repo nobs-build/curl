@@ -416,7 +416,7 @@ LIB_HFILES =         \
   version_win32.h    \
   ws.h
 
-LIB_RCFILES = libcurl.rc
+LIB_RCFILES = ../products/libcurl/libcurl.rc
 
 CSOURCES = $(LIB_CFILES) $(LIB_VAUTH_CFILES) $(LIB_VTLS_CFILES) \
   $(LIB_VQUIC_CFILES) $(LIB_VSSH_CFILES) $(LIB_CURLX_CFILES)

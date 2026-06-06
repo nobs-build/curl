@@ -38,19 +38,52 @@ units
 {
   CurlTool
   {
-    "src/nobs.txt"
-    "src/core/nobs.txt"
-    "src/curl/nobs.txt"
+    "products/curl/nobs.txt"
   }
 
   LibCurl
   {
-    "lib/nobs.txt"
-    "lib/curlx/nobs.txt"
-    "lib/vauth/nobs.txt"
-    "lib/vquic/nobs.txt"
-    "lib/vssh/nobs.txt"
-    "lib/vtls/nobs.txt"
+    "products/libcurl/nobs.txt"
+  }
+
+  Core
+  {
+    "core/nobs.txt"
+  }
+
+  Platform
+  {
+    "plat/nobs.txt"
+  }
+
+  FeatureAuth
+  {
+    "features/auth/nobs.txt"
+  }
+
+  FeatureProtocols
+  {
+    "features/protocols/nobs.txt"
+  }
+
+  FeatureTls
+  {
+    "features/tls/nobs.txt"
+  }
+
+  FeatureQuic
+  {
+    "features/quic/nobs.txt"
+  }
+
+  FeatureSsh
+  {
+    "features/ssh/nobs.txt"
+  }
+
+  CurlInfo
+  {
+    "products/curlinfo/nobs.txt"
   }
 }
 

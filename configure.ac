@@ -5481,7 +5481,7 @@ AC_CONFIG_FILES([\
   src/Makefile \
   lib/Makefile \
   scripts/Makefile \
-  lib/libcurl.vers \
+  lib/libcurl.vers:products/libcurl/libcurl.vers.in \
   tests/Makefile \
   tests/config \
   tests/configurehelp.pm \

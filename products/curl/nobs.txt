@@ -1,0 +1,87 @@
+unit CurlTool
+
+build: curl(config)
+{
+  NO_TOOL
+
+  config =
+  {
+    C_DEFINES = [
+      "CURL_DISABLE_ALTSVC",
+      "CURL_DISABLE_AWS",
+      "CURL_DISABLE_DICT",
+      "CURL_DISABLE_DOH",
+      "CURL_DISABLE_FTP",
+      "CURL_DISABLE_GOPHER",
+      "CURL_DISABLE_HSTS",
+      "CURL_DISABLE_IMAP",
+      "CURL_DISABLE_LDAP",
+      "CURL_DISABLE_LDAPS",
+      "CURL_DISABLE_MQTT",
+      "CURL_DISABLE_POP3",
+      "CURL_DISABLE_RTSP",
+      "CURL_DISABLE_SMB",
+      "CURL_DISABLE_SMTP",
+      "CURL_DISABLE_TELNET",
+      "CURL_DISABLE_TFTP",
+      "CURL_DISABLE_WEBSOCKETS"
+    ]
+  }
+
+  ^BINARY = curl.BINARY
+  ^BINARY_NAME = curl.BINARY_NAME
+}
+
+curl(config): tool_objects_rsp(config) LibCurl::libcurl_static(config)
+{
+  LINK
+  OBJS = ["@${tool_objects_rsp.RSP_FILE}"]
+  LIB = [LibCurl.libcurl_static.LIB]
+  INCLUDE = LibCurl.libcurl_static.INCLUDE
+  OUTPUT_NAME = "curl${EXE_SUFFIX}"
+
+  if TARGET_PLATFORM = "windows"
+  {
+    LIB += [
+      "advapi32.lib",
+      "bcrypt.lib",
+      "crypt32.lib",
+      "ws2_32.lib"
+    ]
+  }
+
+  if TARGET_PLATFORM = "linux"
+  {
+    C_FLAGS += ["-pthread"]
+  }
+}
+
+tool_objects_rsp(config): +tool_objects(config)
+{
+  OBJ2RSP
+  OBJ = OBJS
+  RSP_DIR = P"(${PROJECT_ROOT}/${OUTPUT_DEF_DIR}/rsp/${PROFILE})"
+  ^RSP_FILE = P"(${RSP_DIR}/curl-tool.rsp)"
+}
+
+tool_objects(config): +tool_sources +LibCurl::api(config)
+{
+  C_FILES
+  C_FLAGS += C_COMPILE_FLAG
+  C_DEFINES += ["CURL_STATICLIB"]
+}
+
+tool_sources:
+{
+  NO_TOOL
+  ^C_FILES = [
+    P"(main/*.c)",
+    P"(tool/*.c)",
+    P"(platform/${TARGET_PLATFORM}/*.c)"
+  ]
+  ^INCLUDE = [
+    P"(main)",
+    P"(tool)",
+    P"(platform/${TARGET_PLATFORM})"
+  ]
+}

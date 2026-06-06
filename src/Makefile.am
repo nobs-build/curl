@@ -88,7 +88,7 @@ curl_SOURCES = $(CURL_CFILES) $(CURL_HFILES) $(curl_cfiles_gen) $(curl_hfiles_ge
 endif
 if HAVE_WINDRES
 curl_SOURCES += $(CURL_RCFILES)
-$(CURL_RCFILES): tool_version.h
+$(CURL_RCFILES): $(top_srcdir)/products/curl/tool/tool_version.h
 endif
 
 curl_LDFLAGS = $(CURL_LDFLAGS_BIN) $(UNICODEFLAG)

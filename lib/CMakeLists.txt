@@ -204,7 +204,8 @@ if(BUILD_SHARED_LIBS)
     set_property(TARGET ${LIB_SHARED} APPEND PROPERTY SOURCES "plat/windows/shared/dllmain.c")
     set_property(TARGET ${LIB_SHARED} APPEND PROPERTY SOURCES ${LIB_RCFILES})
     if(CURL_HIDES_PRIVATE_SYMBOLS)
-      set_property(TARGET ${LIB_SHARED} APPEND PROPERTY SOURCES "${PROJECT_SOURCE_DIR}/lib/libcurl.def")
+      set_property(TARGET ${LIB_SHARED} APPEND PROPERTY SOURCES
+        "${PROJECT_SOURCE_DIR}/products/libcurl/libcurl.def")
     endif()
   endif()
   target_link_libraries(${LIB_SHARED} PRIVATE ${CURL_LIBS})
@@ -304,7 +305,7 @@ if(BUILD_SHARED_LIBS)
     #   CURL_LIBCURL_VERSIONED_SYMBOLS_SONAME
     set(CURL_LIBCURL_VERSIONED_SYMBOLS_SONAME ${_cmakesoname})
     configure_file(
-      "${CMAKE_CURRENT_SOURCE_DIR}/libcurl.vers.in"
+      "${PROJECT_SOURCE_DIR}/products/libcurl/libcurl.vers.in"
       "${CMAKE_CURRENT_BINARY_DIR}/libcurl.vers" @ONLY)
     include(CMakePushCheckState)
     include(CheckCSourceCompiles)

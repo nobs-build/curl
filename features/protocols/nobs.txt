@@ -1,0 +1,99 @@
+unit FeatureProtocols
+
+dict:
+{
+  NO_TOOL
+  ^C_FILES = P"(dict/*.c)"
+  ^INCLUDE = P"(dict)"
+}
+
+file:
+{
+  NO_TOOL
+  ^C_FILES = P"(file/*.c)"
+  ^INCLUDE = P"(file)"
+}
+
+ftp:
+{
+  NO_TOOL
+  ^C_FILES = P"(ftp/*.c)"
+  ^INCLUDE = P"(ftp)"
+}
+
+gopher:
+{
+  NO_TOOL
+  ^C_FILES = P"(gopher/*.c)"
+  ^INCLUDE = P"(gopher)"
+}
+
+http:
+{
+  NO_TOOL
+  ^C_FILES = P"(http/*.c)"
+  ^INCLUDE = P"(http)"
+}
+
+imap:
+{
+  NO_TOOL
+  ^C_FILES = P"(imap/*.c)"
+  ^INCLUDE = P"(imap)"
+}
+
+ldap:
+{
+  NO_TOOL
+  ^C_FILES = P"(ldap/*.c)"
+  ^INCLUDE = P"(ldap)"
+}
+
+mqtt:
+{
+  NO_TOOL
+  ^C_FILES = P"(mqtt/*.c)"
+  ^INCLUDE = P"(mqtt)"
+}
+
+pop3:
+{
+  NO_TOOL
+  ^C_FILES = P"(pop3/*.c)"
+  ^INCLUDE = P"(pop3)"
+}
+
+rtsp:
+{
+  NO_TOOL
+  ^C_FILES = P"(rtsp/*.c)"
+  ^INCLUDE = P"(rtsp)"
+}
+
+smb:
+{
+  NO_TOOL
+  ^C_FILES = P"(smb/*.c)"
+  ^INCLUDE = P"(smb)"
+}
+
+smtp:
+{
+  NO_TOOL
+  ^C_FILES = P"(smtp/*.c)"
+  ^INCLUDE = P"(smtp)"
+}
+
+telnet:
+{
+  NO_TOOL
+  ^C_FILES = P"(telnet/*.c)"
+  ^INCLUDE = P"(telnet)"
+}
+
+tftp:
+{
+  NO_TOOL
+  ^C_FILES = P"(tftp/*.c)"
+  ^INCLUDE = P"(tftp)"
+}

@@ -1,0 +1,11 @@
+unit Core
+
+sources:
+{
+  NO_TOOL
+  ^C_FILES = P"(*.c)"
+  ^INCLUDE = [
+    P"(.)",
+    P"(../include)"
+  ]
+}

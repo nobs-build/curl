@@ -1,0 +1,21 @@
+unit FeatureQuic
+
+base:
+{
+  NO_TOOL
+  ^C_FILES = P"(vquic.c)"
+  ^INCLUDE = P"(backends)"
+}
+
+sources:
+{
+  NO_TOOL
+  ^C_FILES = [
+    P"(*.c)",
+    P"(backends/*.c)"
+  ]
+  ^INCLUDE = [
+    P"(.)",
+    P"(backends)"
+  ]
+}
