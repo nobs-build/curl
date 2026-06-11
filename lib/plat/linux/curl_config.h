@@ -1,0 +1,93 @@
+#ifndef HEADER_CURL_CONFIG_LINUX_H
+#define HEADER_CURL_CONFIG_LINUX_H
+
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+
+#define CURL_DISABLE_LDAP 1
+#define CURL_DISABLE_LDAPS 1
+
+#define CURL_OS "Linux"
+
+#define HAVE_ACCEPT4 1
+#define HAVE_ARPA_INET_H 1
+#define HAVE_BASENAME 1
+#define HAVE_BOOL_T 1
+#define HAVE_CLOCK_GETTIME_MONOTONIC 1
+#define HAVE_DIRENT_H 1
+#define HAVE_FCNTL 1
+#define HAVE_FCNTL_H 1
+#define HAVE_FCNTL_O_NONBLOCK 1
+#define HAVE_FREEADDRINFO 1
+#define HAVE_FSEEKO 1
+#define HAVE_GETADDRINFO 1
+#define HAVE_GETADDRINFO_THREADSAFE 1
+#define HAVE_GETHOSTNAME 1
+#define HAVE_GETPEERNAME 1
+#define HAVE_GETSOCKNAME 1
+#define HAVE_GETTIMEOFDAY 1
+#define HAVE_IFADDRS_H 1
+#define HAVE_IF_NAMETOINDEX 1
+#define HAVE_INET_NTOP 1
+#define HAVE_INET_PTON 1
+#define HAVE_IOCTL_FIONBIO 1
+#define HAVE_LIBGEN_H 1
+#define HAVE_LOCALE_H 1
+#define HAVE_NETDB_H 1
+#define HAVE_NETINET_IN_H 1
+#define HAVE_NETINET_TCP_H 1
+#define HAVE_NETINET_UDP_H 1
+#define HAVE_NET_IF_H 1
+#define HAVE_POLL 1
+#define HAVE_POLL_H 1
+#define HAVE_RECV 1
+#define HAVE_SELECT 1
+#define HAVE_SEND 1
+#define HAVE_SETLOCALE 1
+#define HAVE_SIGACTION 1
+#define HAVE_SIGNAL 1
+#define HAVE_SOCKADDR_IN6_SIN6_SCOPE_ID 1
+#define HAVE_SOCKET 1
+#define HAVE_SOCKETPAIR 1
+#define HAVE_STDBOOL_H 1
+#define HAVE_STRCASECMP 1
+#define HAVE_STRERROR_R 1
+#define HAVE_POSIX_STRERROR_R 1
+#define HAVE_STRUCT_TIMEVAL 1
+#define HAVE_SYS_IOCTL_H 1
+#define HAVE_SYS_PARAM_H 1
+#define HAVE_SYS_POLL_H 1
+#define HAVE_SYS_SELECT_H 1
+#define HAVE_SYS_SOCKET_H 1
+#define HAVE_SYS_STAT_H 1
+#define HAVE_SYS_TIME_H 1
+#define HAVE_SYS_TYPES_H 1
+#define HAVE_SYS_UN_H 1
+#define HAVE_UNISTD_H 1
+#define HAVE_UTIME 1
+#define HAVE_UTIME_H 1
+
+#define USE_UNIX_SOCKETS 1
+
+#define RECV_TYPE_ARG1 int
+#define RECV_TYPE_ARG2 void *
+#define RECV_TYPE_ARG3 size_t
+#define RECV_TYPE_ARG4 int
+#define RECV_TYPE_RETV ssize_t
+
+#define SEND_TYPE_ARG1 int
+#define SEND_TYPE_ARG2 void *
+#define SEND_TYPE_ARG3 size_t
+#define SEND_TYPE_ARG4 int
+#define SEND_TYPE_RETV ssize_t
+
+#define SIZEOF_INT 4
+#define SIZEOF_LONG 8
+#define SIZEOF_OFF_T 8
+#define SIZEOF_CURL_OFF_T 8
+#define SIZEOF_CURL_SOCKET_T 4
+#define SIZEOF_SIZE_T 8
+#define SIZEOF_TIME_T 8
+
+#endif

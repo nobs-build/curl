@@ -39,10 +39,10 @@ LIB_CURLX_CFILES =      \
   curlx/strparse.c      \
   curlx/timediff.c      \
   curlx/timeval.c       \
-  curlx/version_win32.c \
   curlx/wait.c          \
   curlx/warnless.c      \
-  curlx/winapi.c
+  plat/windows/version_win32.c \
+  plat/windows/winapi.c
 
 LIB_CURLX_HFILES =      \
   curlx/base64.h        \
@@ -60,9 +60,9 @@ LIB_CURLX_HFILES =      \
   curlx/strparse.h      \
   curlx/timediff.h      \
   curlx/timeval.h       \
-  curlx/version_win32.h \
   curlx/wait.h          \
   curlx/warnless.h      \
+  plat/windows/version_win32.h \
   curlx/winapi.h
 
 LIB_VAUTH_CFILES =      \
@@ -95,7 +95,6 @@ LIB_VTLS_CFILES =           \
   vtls/rustls.c             \
   vtls/schannel.c           \
   vtls/schannel_verify.c    \
-  vtls/vtls.c               \
   vtls/vtls_scache.c        \
   vtls/vtls_spack.c         \
   vtls/wolfssl.c            \
@@ -122,7 +121,6 @@ LIB_VTLS_HFILES =           \
 LIB_VQUIC_CFILES =      \
   vquic/curl_ngtcp2.c   \
   vquic/curl_quiche.c   \
-  vquic/vquic.c         \
   vquic/vquic-tls.c
 
 LIB_VQUIC_HFILES =      \
@@ -142,8 +140,8 @@ LIB_VSSH_HFILES =    \
   vssh/ssh.h
 
 LIB_CFILES =         \
-  altsvc.c           \
-  amigaos.c          \
+  protocols/altsvc.c \
+  plat/amigaos/amigaos.c \
   asyn-ares.c        \
   asyn-base.c        \
   asyn-thrdd.c       \
@@ -154,7 +152,7 @@ LIB_CFILES =         \
   cf-capsule.c       \
   cf-h1-proxy.c      \
   cf-h2-proxy.c      \
-  cf-h3-proxy.c      \
+  vquic/cf-h3-proxy.c \
   cf-haproxy.c       \
   cf-https-connect.c \
   cf-ip-happy.c      \
@@ -184,9 +182,9 @@ LIB_CFILES =         \
   curl_trc.c         \
   cw-out.c           \
   cw-pause.c         \
-  dict.c             \
+  protocols/dict.c   \
   dnscache.c         \
-  doh.c              \
+  protocols/doh.c    \
   dynhds.c           \
   easy.c             \
   easygetopt.c       \
@@ -196,22 +194,22 @@ LIB_CFILES =         \
   file.c             \
   fileinfo.c         \
   formdata.c         \
-  ftp.c              \
+  protocols/ftp.c    \
   ftplistparser.c    \
   getenv.c           \
   getinfo.c          \
-  gopher.c           \
+  protocols/gopher.c \
   hash.c             \
   headers.c          \
   hmac.c             \
   hostip.c           \
   hostip4.c          \
   hostip6.c          \
-  hsts.c             \
+  protocols/hsts.c   \
   http.c             \
   http1.c            \
   http2.c            \
-  http_aws_sigv4.c   \
+  protocols/http_aws_sigv4.c \
   http_chunks.c      \
   http_digest.c      \
   http_negotiate.c   \
@@ -220,40 +218,40 @@ LIB_CFILES =         \
   httpsrr.c          \
   idn.c              \
   if2ip.c            \
-  imap.c             \
-  ldap.c             \
+  protocols/imap.c   \
+  protocols/ldap.c   \
   llist.c            \
-  macos.c            \
+  plat/macos/macos.c \
   md4.c              \
   md5.c              \
   memdebug.c         \
   mime.c             \
   mprintf.c          \
-  mqtt.c             \
+  protocols/mqtt.c   \
   multi.c            \
   multi_ev.c         \
   multi_ntfy.c       \
   netrc.c            \
   noproxy.c          \
-  openldap.c         \
+  protocols/openldap.c \
   parsedate.c        \
   peer.c             \
   pingpong.c         \
-  pop3.c             \
+  protocols/pop3.c   \
   progress.c         \
   protocol.c         \
   psl.c              \
   rand.c             \
   ratelimit.c        \
   request.c          \
-  rtsp.c             \
+  protocols/rtsp.c   \
   select.c           \
   sendf.c            \
   setopt.c           \
   sha256.c           \
   slist.c            \
-  smb.c              \
-  smtp.c             \
+  protocols/smb.c    \
+  protocols/smtp.c   \
   socketpair.c       \
   socks.c            \
   socks_gssapi.c     \
@@ -262,9 +260,9 @@ LIB_CFILES =         \
   strcase.c          \
   strequal.c         \
   strerror.c         \
-  system_win32.c     \
-  telnet.c           \
-  tftp.c             \
+  plat/windows/system_win32.c \
+  protocols/telnet.c \
+  protocols/tftp.c   \
   thrdpool.c         \
   thrdqueue.c        \
   transfer.c         \
@@ -274,12 +272,14 @@ LIB_CFILES =         \
   uint-table.c       \
   url.c              \
   urlapi.c           \
+  vquic.c            \
   version.c          \
+  vtls.c             \
   ws.c
 
 LIB_HFILES =         \
   altsvc.h           \
-  amigaos.h          \
+  plat/amigaos/amigaos.h \
   arpa_telnet.h      \
   asyn.h             \
   bufq.h             \
@@ -289,7 +289,7 @@ LIB_HFILES =         \
   cf-capsule.h       \
   cf-h1-proxy.h      \
   cf-h2-proxy.h      \
-  cf-h3-proxy.h      \
+  vquic/cf-h3-proxy.h \
   cf-haproxy.h       \
   cf-https-connect.h \
   cf-ip-happy.h      \
@@ -322,6 +322,7 @@ LIB_HFILES =         \
   curl_sha256.h      \
   curl_sha512_256.h  \
   curl_share.h       \
+  curl_system.h      \
   curl_sspi.h        \
   curl_threads.h     \
   curl_trc.h         \
@@ -363,7 +364,7 @@ LIB_HFILES =         \
   if2ip.h            \
   imap.h             \
   llist.h            \
-  macos.h            \
+  plat/macos/macos.h \
   mime.h             \
   mqtt.h             \
   multihandle.h      \
@@ -388,7 +389,7 @@ LIB_HFILES =         \
   setopt.h           \
   setup-os400.h      \
   setup-vms.h        \
-  setup-win32.h      \
+  plat/windows/setup-win32.h \
   sigpipe.h          \
   slist.h            \
   smb.h              \
@@ -399,7 +400,7 @@ LIB_HFILES =         \
   splay.h            \
   strcase.h          \
   strerror.h         \
-  system_win32.h     \
+  plat/windows/system_win32.h \
   telnet.h           \
   tftp.h             \
   thrdpool.h         \
@@ -412,6 +413,7 @@ LIB_HFILES =         \
   url.h              \
   urlapi-int.h       \
   urldata.h          \
+  version_win32.h    \
   ws.h
 
 LIB_RCFILES = libcurl.rc

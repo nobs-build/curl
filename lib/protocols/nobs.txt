@@ -1,0 +1,12 @@
+unit LibCurl
+
+feature_protocols(config):
+{
+  NO_TOOL
+  ^C_FILES = [
+    P"(*.c)"
+  ]
+  ^INCLUDE = [
+    P"(.)"
+  ]
+}

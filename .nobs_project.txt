@@ -1,0 +1,101 @@
+name curl
+
+tools
+{
+  obj2rsp
+  {
+    tool_type = "command"
+    !OBJ2RSP
+    !OBJ
+    !RSP_DIR
+    !RSP_FILE
+
+    cmdline = []
+    DQUOTE = R"(")"
+    PRINTF_FORMAT = R"('%s\n')"
+
+    if os_family = "windows"
+    {
+      cmdline += [
+        "if not exist ${DQUOTE}${RSP_DIR}${DQUOTE} mkdir ${DQUOTE}${RSP_DIR}${DQUOTE}",
+        "type nul > ${DQUOTE}${RSP_FILE}${DQUOTE}",
+        "echo #{OBJ}>>${DQUOTE}${RSP_FILE}${DQUOTE}"
+      ]
+    }
+
+    if os_family = "unix"
+    {
+      cmdline += [
+        "mkdir -p ${DQUOTE}${RSP_DIR}${DQUOTE}",
+        ": > ${DQUOTE}${RSP_FILE}${DQUOTE}",
+        "printf ${PRINTF_FORMAT} ${DQUOTE}#{OBJ}${DQUOTE} >> ${DQUOTE}${RSP_FILE}${DQUOTE}"
+      ]
+    }
+  }
+}
+
+units
+{
+  CurlTool
+  {
+    "src/nobs.txt"
+  }
+
+  LibCurl
+  {
+    "lib/nobs.txt"
+    "lib/curlx/nobs.txt"
+    "lib/vauth/nobs.txt"
+    "lib/vquic/nobs.txt"
+    "lib/vssh/nobs.txt"
+    "lib/vtls/nobs.txt"
+  }
+}
+
+profiles
+{
+  windows_debug
+  {
+    arch = "x64"
+    TARGET_PLATFORM = "windows"
+    STATIC_LIB_SUFFIX = ".lib"
+    SHARED_LIB_SUFFIX = ".dll"
+    EXE_SUFFIX = ".exe"
+    C_COMPILE_FLAG = ["/c"]
+    C_FLAGS += ["/Zi", "/Od"]
+    LINK_FLAGS += ["/DEBUG"]
+  }
+
+  windows_release
+  {
+    arch = "x64"
+    TARGET_PLATFORM = "windows"
+    STATIC_LIB_SUFFIX = ".lib"
+    SHARED_LIB_SUFFIX = ".dll"
+    EXE_SUFFIX = ".exe"
+    C_COMPILE_FLAG = ["/c"]
+    C_FLAGS += ["/O2"]
+  }
+
+  unix_debug
+  {
+    arch = "x86_64"
+    TARGET_PLATFORM = "linux"
+    STATIC_LIB_SUFFIX = ".a"
+    SHARED_LIB_SUFFIX = ".so"
+    EXE_SUFFIX = ""
+    C_COMPILE_FLAG = ["-c"]
+    C_FLAGS += ["-g", "-O0"]
+  }
+
+  unix_release
+  {
+    arch = "x86_64"
+    TARGET_PLATFORM = "linux"
+    STATIC_LIB_SUFFIX = ".a"
+    SHARED_LIB_SUFFIX = ".so"
+    EXE_SUFFIX = ""
+    C_COMPILE_FLAG = ["-c"]
+    C_FLAGS += ["-O2"]
+  }
+}

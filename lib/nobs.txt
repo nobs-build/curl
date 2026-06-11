@@ -1,0 +1,175 @@
+unit LibCurl
+
+build: libcurl_static(config)
+{
+  NO_TOOL
+
+  config =
+  {
+    C_DEFINES = [
+      "CURL_DISABLE_ALTSVC",
+      "CURL_DISABLE_AWS",
+      "CURL_DISABLE_DICT",
+      "CURL_DISABLE_DOH",
+      "CURL_DISABLE_FTP",
+      "CURL_DISABLE_GOPHER",
+      "CURL_DISABLE_HSTS",
+      "CURL_DISABLE_IMAP",
+      "CURL_DISABLE_LDAP",
+      "CURL_DISABLE_LDAPS",
+      "CURL_DISABLE_MQTT",
+      "CURL_DISABLE_POP3",
+      "CURL_DISABLE_RTSP",
+      "CURL_DISABLE_SMB",
+      "CURL_DISABLE_SMTP",
+      "CURL_DISABLE_TELNET",
+      "CURL_DISABLE_TFTP",
+      "CURL_DISABLE_WEBSOCKETS"
+    ]
+
+    features =
+    {
+      feature_auth = {}
+      feature_curlx = {}
+    }
+  }
+
+  ^LIB = libcurl_static.LIB
+  ^LIB_NAME = libcurl_static.LIB_NAME
+  ^INCLUDE = libcurl_static.INCLUDE
+  ^C_DEFINES = libcurl_static.C_DEFINES
+}
+
+libcurl_static(config): objects_static_rsp(config)
+{
+  STATIC
+  OBJS = ["@${objects_static_rsp.RSP_FILE}"]
+  OUTPUT_NAME = "libcurl${STATIC_LIB_SUFFIX}"
+  ^INCLUDE
+  ^C_DEFINES += ["CURL_STATICLIB"]
+}
+
+libcurl_shared(config): objects_shared_rsp(config)
+{
+  LINK
+  DLL
+  OBJS = ["@${objects_shared_rsp.RSP_FILE}"]
+  OUTPUT_NAME = "libcurl${SHARED_LIB_SUFFIX}"
+  ^INCLUDE
+
+  if TARGET_PLATFORM = "windows"
+  {
+    DEF = P"(libcurl.def)"
+    LIB += [
+      "advapi32.lib",
+      "bcrypt.lib",
+      "crypt32.lib",
+      "ws2_32.lib"
+    ]
+  }
+
+  if TARGET_PLATFORM = "linux"
+  {
+    LINK_FLAGS += ["-shared"]
+  }
+}
+
+objects_static_rsp(config): +objects_static(config)
+{
+  OBJ2RSP
+  OBJ = OBJS
+  RSP_DIR = P"(${PROJECT_ROOT}/${OUTPUT_DEF_DIR}/rsp/${PROFILE})"
+  ^RSP_FILE = P"(${RSP_DIR}/libcurl-static.rsp)"
+}
+
+objects_shared_rsp(config): +objects_shared(config)
+{
+  OBJ2RSP
+  OBJ = OBJS
+  RSP_DIR = P"(${PROJECT_ROOT}/${OUTPUT_DEF_DIR}/rsp/${PROFILE})"
+  ^RSP_FILE = P"(${RSP_DIR}/libcurl-shared.rsp)"
+}
+
+objects_static(config): +compile_inputs(config)
+{
+  C_FILES
+  C_FLAGS += C_COMPILE_FLAG
+  C_DEFINES = ["CURL_STATICLIB"]
+
+  if config.C_DEFINES
+  {
+    C_DEFINES += config.C_DEFINES
+  }
+}
+
+objects_shared(config): +compile_inputs(config)
+{
+  C_FILES
+  C_FLAGS += C_COMPILE_FLAG
+
+  if config.C_DEFINES
+  {
+    C_DEFINES += config.C_DEFINES
+  }
+
+  if TARGET_PLATFORM = "windows"
+  {
+    C_FILES += [
+      P"(plat/${TARGET_PLATFORM}/shared/*.c)"
+    ]
+  }
+
+  if TARGET_PLATFORM = "linux"
+  {
+    C_FLAGS += ["-fPIC"]
+  }
+}
+
+compile_inputs(config): +api +core(config) +platform(config) +@config.features(config)
+{
+  NO_TOOL
+
+  ^C_FILES
+  ^INCLUDE
+  ^C_DEFINES = [
+    "BUILDING_LIBCURL"
+  ]
+}
+
+api:
+{
+  NO_TOOL
+  ^INCLUDE = [
+    P"(.)",
+    P"(../include)",
+    P"(plat/${TARGET_PLATFORM})" // this shouldn't be here, core must not reference plat-specific!!
+  ]
+}
+
+core(config):
+{
+  NO_TOOL
+  ^C_FILES = [
+    P"(*.c)"
+  ]
+}
+
+platform(config):
+{
+  NO_TOOL
+
+  ^INCLUDE = [
+    P"(plat/${TARGET_PLATFORM})"
+  ]
+
+  ^C_FILES = [
+    P"(plat/${TARGET_PLATFORM}/*.c)"
+  ]
+
+  if TARGET_PLATFORM = "linux"
+  {
+    ^C_DEFINES = [
+      "HAVE_CONFIG_H"
+    ]
+  }
+}

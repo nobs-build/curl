@@ -18,6 +18,32 @@ curl](https://everything.curl.dev/).
 Find out how to install curl by reading [the INSTALL
 document](https://curl.se/docs/install.html).
 
+## Building with nobs
+
+This checkout includes nobs build files. Before building on a new machine, let
+nobs detect the available compiler toolchains:
+
+```sh
+nobs --find-compilers
+```
+
+On Windows, the provided profiles target 64-bit Visual Studio 2022 builds:
+
+```sh
+nobs build windows_debug
+nobs build windows_release
+```
+
+On Linux, the provided profiles target x86_64 builds:
+
+```sh
+nobs build unix_debug
+nobs build unix_release
+```
+
+The `build` target builds the curl command-line tool and the static libcurl
+library it depends on. Build artifacts are written below the `out` directory.
+
 libcurl is the library curl is using to do its job. It is readily available to
 be used by your software. Read [the libcurl
 man page](https://curl.se/libcurl/c/libcurl.html) to learn how.
